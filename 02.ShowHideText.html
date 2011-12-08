@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        
+        $('#showLink').click(function(){ 
+          $('#someText').show() // use .show(<miliseconds>) for animation
+        })
+        
+        $('#hideLink').click(function(){ 
+          $('#someText').hide() // use .hide(<miliseconds>) for animation
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <p id="someText">Some Text</p>
+    <a id="showLink" href="#">Show</a><a id="hideLink" href="#">Hide</a>
+  </body>
+</html>
