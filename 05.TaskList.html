@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        
+        $('#taskText').keydown(function(evt){
+          if (evt.keyCode == 13){
+            
+            addTask(this, evt)
+            // var taskText = $('#taskText').val() // jQuery way
+            //var taskText = this.value // accessing dom directly
+            
+            //$('<li>').text(taskText).appendTo('#tasks')
+            //$('#tasks').append($('<li>').text(taskText)) // doing the same as in previous line 
+          }
+        })
+        
+        $('#addTask').click(function(evt){
+          addTask(document.getElementById('taskText'), evt) // or drop streight to javascript. 
+        })
+        
+        $('#tasks').on('click', 'li', function(evt){
+          if ($(this).hasClass('done')) {
+            $(this).fadeOut()            
+          }
+          else {
+            $(this).addClass('done')
+          }
+        })
+        
+        
+      })
+      
+      function addTask(textBox, evt) {
+        evt.preventDefault()
+        taskText = textBox.value
+        $('<li>').text(taskText).appendTo('#tasks')
+        textBox.value = "";
+      }
+      
+    </script>
+    <style type="text/css">
+      .done {
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="tasks">
+    </ul>
+    <input type="text" id="taskText" />
+    <input type="submit" id="addTask" />
+  </body>
+</html>
