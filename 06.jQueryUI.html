@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/sunny/jquery-ui.css" rel="stylesheet" media="screen" type="text/css"></link>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        
+        $('#taskText').keydown(function(evt){
+          if (evt.keyCode == 13){
+            addTask(this, evt)
+          }
+        })
+        
+        $('#addTask').click(function(evt){
+          addTask(document.getElementById('taskText'), evt) // or drop streight to javascript. 
+        })
+        
+        $('.tasks').on('click', 'li', function(evt){
+          if ($(this).hasClass('done')) {
+            $(this).fadeOut()            
+          }
+          else {
+            $(this).addClass('done')
+          }
+        })
+        
+        $('#taskDialog').dialog({
+          title: "Add task",
+          autoOpen: false,
+          modal: true,
+        })
+        
+        $('#showTaskDialog').click(function(evt){
+          evt.preventDefault()
+          $('#taskDialog').dialog('open')
+        })
+        
+        
+        $('.tasks').sortable({
+          connectWith: '.tasks',
+          update: function(evt, ui) {
+            console.log($(this).sortable('toArray'))
+          }
+        })
+        
+        $('#taskDueDate').datepicker()
+        
+        
+      })
+      
+      function addTask(textBox, evt) {
+        evt.preventDefault()
+        taskText = textBox.value
+        li = $('<li>').text(taskText).appendTo('#houseTasks')
+        li.addClass('highlight').removeClass('highlight', 'slow')
+        textBox.value = "";
+        $('#taskDialog').dialog('close')
+      }
+      
+    </script>
+    <style type="text/css">
+      .done {
+        text-decoration: line-through;
+      }
+      .highlight {
+        background-color: yellow;
+      }
+      .
+    </style>
+  </head>
+  <body>
+    Home Tasks
+    <ul id="houseTasks" class="tasks">
+      <li id="task1">Do the Laundry</li>
+      <li id="task2">Wash the Dishes</li>
+      <li id="task3">Sweep the Floor</li>
+    </ul>
+    
+    Work Tasks
+    <ul id="workTasks" class="tasks">
+      <li id="task4">Bill the client</li>
+      <li id="task5">Do some work</li>
+      <li id="task6">Break the build</li>
+    </ul>
+    <a href="#" id="showTaskDialog">Add task</a>
+    <div id="taskDialog">
+      <input type="text" id="taskText" /><p></p>
+      <input type="text" id="taskDueDate" /><p></p>
+      <input type="submit" id="addTask" />
+    </div>
+    
+  </body>
+</html>
