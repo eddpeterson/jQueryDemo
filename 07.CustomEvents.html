@@ -9,23 +9,32 @@
         
         $('#firstName,#lastName').blur(function(){
           console.log('inside blur')
+          
+          /* This was before jQjery 1.4.3
           personInfo.firstName = $('#firstName').val()
           personInfo.lastName = $('#lastName').val()
           $(personInfo).trigger('personUpdated')
+          */
+          $(personInfo).data('firstName', $('#firstName').val())
+          $(personInfo).data('lastName', $('#lastName').val())
         })
         
+        /* This was before jQjery 1.4.3
         $(personInfo).bind('personUpdated', updateCustomizedFirstName)
         $(personInfo).bind('personUpdated', updateCustomizedFullName)
+        */
+        $(personInfo).bind('changeData', updateCustomizedFirstName)
+        $(personInfo).bind('changeData', updateCustomizedFullName)
       })
       
       function updateCustomizedFirstName() {
         console.log('inside update customized first name')
-        console.log('firstName: ' + this.firstName)
-        $('.customizedFirstName').text(this.firstName)
+        console.log('firstName: ' + $(this).data('firstName'))
+        $('.customizedFirstName').text($(this).data('firstName'))
       }
       function updateCustomizedFullName(){
         console.log('inside update customized full name')
-        $('.customizedFullName').text(this.firstName + ' ' + this.lastName)
+        $('.customizedFullName').text($(this).data('firstName') + ' ' + $(this).data('lastName'))
       }
       
     </script>
