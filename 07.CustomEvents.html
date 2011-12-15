@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      
+      var personInfo = {}
+      
+      $(document).ready(function(){
+        
+        $('#firstName,#lastName').blur(function(){
+          console.log('inside blur')
+          personInfo.firstName = $('#firstName').val()
+          personInfo.lastName = $('#lastName').val()
+          $(personInfo).trigger('personUpdated')
+        })
+        
+        $(personInfo).bind('personUpdated', updateCustomizedFirstName)
+        $(personInfo).bind('personUpdated', updateCustomizedFullName)
+      })
+      
+      function updateCustomizedFirstName() {
+        console.log('inside update customized first name')
+        console.log('firstName: ' + this.firstName)
+        $('.customizedFirstName').text(this.firstName)
+      }
+      function updateCustomizedFullName(){
+        console.log('inside update customized full name')
+        $('.customizedFullName').text(this.firstName + ' ' + this.lastName)
+      }
+      
+    </script>
+  </head>
+  <body>
+    <p> Hello <span class="customizedFirstName">Who?</span></p>
+    First name: <input id="firstName" type="text"/>
+    Last name: <input id="lastName" type="text">
+    <p> Created by <span class="customizedFullName">Who?</span></p>
+  </body>
+</html>
