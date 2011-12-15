@@ -6,6 +6,10 @@
       var personInfo = {}
       
       $(document).ready(function(){
+        $('#dataId').click(function(){
+          console.log($(this).data('id'))
+          
+        })
         
         $('#firstName,#lastName').blur(function(){
           console.log('inside blur')
@@ -44,5 +48,6 @@
     First name: <input id="firstName" type="text"/>
     Last name: <input id="lastName" type="text">
     <p> Created by <span class="customizedFullName">Who?</span></p>
+    <sapn id="dataId" data-id="123">Click to alert the data-id attribute</span>
   </body>
 </html>
